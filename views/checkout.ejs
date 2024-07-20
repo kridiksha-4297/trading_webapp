@@ -1,0 +1,80 @@
+<%- include("partials/header", { title: "Checkout" }) %>
+
+<section class="checkout main-content" id="checkout">
+    <br><br><br><br><br>
+    <div class="container">
+        <h3 class="mt-4">Checkout</h3>
+        <% if (cart && cart.length > 0) { %>
+            <ul class="list-group mb-4">
+                <% cart.forEach(item => { %>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center">
+                            <img src="<%= item.image || '/images/placeholder.png' %>" alt="<%= item.name %>" class="img-thumbnail" style="width: 100px; height: 100px; object-fit: cover;">
+                            <div class="ml-3">
+                                <h5><%= item.name %></h5>
+                                <p>Price: $<%= item.price %></p>
+                                <p>Quantity: <%= item.quantity %></p>
+                                <p>Total: $<%= (item.price * item.quantity).toFixed(2) %></p>
+                            </div>
+                        </div>
+                    </li>
+                <% }) %>
+            </ul>
+            <div class="card">
+                <div class="card-body">
+                    <form action="/process-checkout" method="POST">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="firstName">First Name</label>
+                                <input type="text" class="form-control" id="firstName" name="firstName" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" class="form-control" id="lastName" name="lastName" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact">Contact</label>
+                            <input type="text" class="form-control" id="contact" name="contact" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="address1">Address Line 1</label>
+                            <input type="text" class="form-control" id="address1" name="address1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="address2">Address Line 2</label>
+                            <input type="text" class="form-control" id="address2" name="address2">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="city">City</label>
+                                <input type="text" class="form-control" id="city" name="city" required>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="state">State</label>
+                                <input type="text" class="form-control" id="state" name="state" required>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="zip">Pin Code</label>
+                                <input type="text" class="form-control" id="zip" name="zip" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="country">Country</label>
+                            <input type="text" class="form-control" id="country" name="country" required>
+                        </div>
+                        <button type="submit" class="btn btn-success btn-block">Proceed to Payment</button>
+                    </form>
+                </div>
+            </div>
+        <% } else { %>
+            <p>Your cart is empty. Add some items before checking out.</p>
+        <% } %>
+    </div>
+</section>
+
+<%- include("partials/footer") %>

@@ -1,0 +1,47 @@
+<%- include("partials/header", { title: "My Cart" }) %>
+
+<section class="cart main-content" id="cart">
+    <br><br><br><br><br>
+    <div class="container">
+        <h3 class="mt-4">Cart Items</h3>
+        <% if (cart && cart.length > 0) { %>
+            <div class="row">
+                <div class="col-md-9">
+                    <ul class="list-group">
+                        <% cart.forEach(item => { %>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-center">
+                                    <img src="<%= item.image || '/images/logo.jpg' %>" alt="<%= item.name %>" class="img-thumbnail" style="width: 100px; height: 100px; object-fit: cover;">
+                                    <div class="ml-3">
+                                        <h5><%= item.name %></h5>
+                                        <p>Price: $<%= item.price %></p>
+                                        <p>Quantity: <%= item.quantity %></p>
+                                        <p>Total: $<%= (item.price * item.quantity).toFixed(2) %></p>
+                                    </div>
+                                </div>
+                                <form action="/remove-from-cart/<%= item.productId %>" method="POST">
+                                    <button type="submit" class="btn btn-danger">Remove</button>
+                                </form>
+                            </li>
+                        <% }) %>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5>Cart Summary</h5>
+                            <hr>
+                            <p>Items: <%= cart.reduce((total, item) => total + item.quantity, 0) %></p>
+                            <p>Total Price: $<%= cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2) %></p>
+                            <a href="/checkout" class="btn btn-danger btn-block">Proceed to Checkout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% } else { %>
+            <p>Your cart is empty. Add some items before checking out.</p>
+        <% } %>
+    </div>
+</section>
+
+<%- include("partials/footer") %>

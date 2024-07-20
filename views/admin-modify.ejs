@@ -1,0 +1,36 @@
+<%- include("partials/header", { title: "Modify Product" }) %>
+
+<section class="admin-modify main-content" id="admin-modify">
+    <br><br><br><br><br>
+    <div class="container">
+        <div class="card rounded-3 shadow-lg">
+            <div class="card-body">
+                <h2 class="card-title text-center mb-4">Modify Product</h2>
+                <form action="/admin/modify/<%= product._id %>" method="POST">
+                    <div class="form-group mb-3">
+                        <label for="name" class="form-label">Name:</label>
+                        <input type="text" class="form-control" id="name" name="name" value="<%= product.name %>">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="description" class="form-label">Description:</label>
+                        <input type="text" class="form-control" id="description" name="description" value="<%= product.description %>">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="price" class="form-label">Price:</label>
+                        <input type="number" class="form-control" id="price" name="price" value="<%= product.price %>">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="stock" class="form-label">Stock:</label>
+                        <input type="number" class="form-control" id="stock" name="stock" value="<%= product.stock %>">
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <button type="submit" class="btn btn-success btn-lg">Update</button>
+                        <a href="/admin/delete/<%= product._id %>" class="btn btn-danger btn-lg">Delete</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<%- include("partials/footer") %>

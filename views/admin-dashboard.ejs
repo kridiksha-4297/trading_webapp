@@ -1,0 +1,31 @@
+<%- include("partials/header", { title: "Admin Dashboard" }) %>
+
+<section class="admin-dashboard main-content" id="admin-dashboard">
+    <br><br><br><br><br>
+    <div class="container">
+        <div class="row">
+            <% products.forEach(function(product, index) { %>
+                <div class="col-md-3">
+                    <div class="product-card">
+                        <img src="<%= product.image %>" class="product-img" alt="<%= product.name %>">
+                        <h5 class="product-name"><a href="/products/<%= product.name %>"><%= product.name %></a></h5>
+                        <p class="product-description"><%= product.description %></p>
+                        <p class="product-price">$<%= product.price %></p>
+                        <a href="/admin/modify/<%= product._id %>" class="btn btn-primary btn-block">Modify</a>
+                    </div>
+                </div>
+                <% if ((index + 1) % 4 === 0) { %>
+                    </div><div class="row">
+                <% } %>
+            <% }); %>
+        </div>
+    </div>
+
+    <div class="container">
+        <a href="/admin/upload" class="btn btn-primary">Add Product</a>
+        <a href="/admin/orders" class="btn btn-primary">View Orders</a>
+        <a href="/logout" class="btn btn-danger">Logout</a>
+    </div>
+</section>
+
+<%- include("partials/footer") %>

@@ -1,0 +1,38 @@
+<%- include("partials/header", { title: "Product" }) %>
+
+<section class="product-detail main-content" id="product-detail">
+    <br><br><br><br>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <img src="<%= product.image %>" class="product-img-detail" alt="<%= product.name %>">
+            </div>
+            <div class="col-md-6">
+                <br><br>
+                <h3><%= product.name %></h3>
+                <p><%= product.description %></p>
+                <p><strong>Price:</strong> $<%= product.price %></p>
+                <form action="/add-to-cart/<%= product._id %>" method="POST">
+                    <label for="quantity">Quantity:</label>
+                    <input type="number" id="quantity" name="quantity" min="1" value="1" required>
+                    <button type="submit" class="btn btn-primary">Add to Cart</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<%- include("partials/footer") %>
+
+<style>
+    .product-detail .product-img-detail {
+        width: 100%;
+        height: auto;
+    }
+    .product-detail .container {
+        margin-top: 20px;
+    }
+    .product-detail .btn {
+        margin-top: 20px;
+    }
+</style>
